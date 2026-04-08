@@ -1,6 +1,6 @@
 # devdocs-rag
 
-공식 기술 문서 연계 LLM 기반 개발 학습 질의응답 플랫폼
+공식 기술 문서 RAG (Retrieval-Augmented Generation) 기반 개발 학습 질의응답 플랫폼
 
 ## 프로젝트 개요
 
@@ -25,8 +25,19 @@
 ```
 devdocs-rag/
 ├── scripts/         # 문서 수집 파이프라인 스크립트
+│   ├── fetch_sitemap.py        # 문서 URL 수집
+│   ├── parse_page.py           # 문서 파싱 및 구조화
+│   ├── chunking_experiment.py  # 청킹 전략 비교
+│   └── store_and_search.py     # 벡터 저장 및 검색
 ├── data/            # 수집된 URL 및 원문 데이터
+│   ├── urls.txt
+│   ├── url_mapping.json
+│   ├── parsed_sections.json
+│   ├── chunks_strategy_a.json
+│   └── chunks_strategy_b.json
+├── chroma_db/                  # 벡터 DB (git 제외)
 ├── .env             # 환경변수 (git 제외)
+├── .gitignore
 └── requirements.txt
 ```
 
@@ -37,3 +48,19 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ``` 
+
+---
+
+## 현재 구현 상태 (Phase 1 ~ 4 완료)
+
+### 1. 문서 수집 파이프라인
+
+- LangChain 공식 문서 GitHub 저장소를 기준으로 `.mdx` 파일 수집
+- 총 **1,852개 문서 URL 확보**
+- GitHub 경로 ↔ 실제 문서 URL 매핑 구조 생성
+
+```json
+{
+  "github_path": "src/oss/langchain/rag.mdx",
+  "url": "https://python.langchain.com/docs/langchain/rag/"
+}
