@@ -24,21 +24,19 @@
 ## 디렉토리 구조
 ```
 devdocs-rag/
-├── scripts/         # 문서 수집 파이프라인 스크립트
+├── ai-server/experiments/poc/  # PoC: 문서 수집·파싱·청킹 비교·Chroma 검색
 │   ├── fetch_sitemap.py        # 문서 URL 수집
 │   ├── parse_page.py           # 문서 파싱 및 구조화
 │   ├── chunking_experiment.py  # 청킹 전략 비교
-│   └── store_and_search.py     # 벡터 저장 및 검색
-├── data/            # 수집된 URL 및 원문 데이터
-│   ├── urls.txt
-│   ├── url_mapping.json
-│   ├── parsed_sections.json
-│   ├── chunks_strategy_a.json
-│   └── chunks_strategy_b.json
-├── chroma_db/                  # 벡터 DB (git 제외)
-├── .env             # 환경변수 (git 제외)
+│   ├── store_and_search.py     # 벡터 저장 및 검색
+│   └── requirements.txt
+├── backend/ # (A-1 예정) Spring Boot — 인증·이력·SSE 중계
+├── frontend/ # (A-1 예정) React + Vite + TypeScript
+├── .editorconfig
+├── .gitattributes
 ├── .gitignore
-└── requirements.txt
+├── CONTRIBUTING.md
+└── README.md
 ```
 
 ## 실행 방법
